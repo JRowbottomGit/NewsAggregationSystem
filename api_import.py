@@ -1,6 +1,7 @@
 
 import pprint
 import requests     # 2.19.1
+import json #for saving file
 
 secret = 'a24e63a8df8b4c4092756ca4e694c239'
 
@@ -9,7 +10,7 @@ url = 'https://newsapi.org/v2/everything?'
 
 # Specify the query and number of returns
 parameters = {
-    'q': 'big data', # query phrase
+    'q': 'War', #'Gold', #'natural language processing', #'Trump', #'big data', # query phrase
     'pageSize': 20,  # maximum is 100
     'apiKey': secret # your own API key
 }
@@ -21,11 +22,14 @@ response = requests.get(url, params=parameters)
 response_json = response.json()
 pprint.pprint(response_json)
 
+#save data json
+with open("response_json.json", "w") as f:
+    json.dump(response_json, f)
+
 for i in response_json['articles']:
     print(i['title'])
 
-import wordcloud
-#from wordcloud import WordCloud
+from wordcloud import WordCloud
 import matplotlib.pyplot as plt
 
 # Create an empty string
