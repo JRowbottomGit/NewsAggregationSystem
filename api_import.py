@@ -10,7 +10,7 @@ url = 'https://newsapi.org/v2/everything?'
 
 # Specify the query and number of returns
 parameters = {
-    'q': 'War', #'Gold', #'natural language processing', #'Trump', #'big data', # query phrase
+    'q': 'Manchester', #'Gold', #'natural language processing', #'Trump', #'big data', # query phrase
     'pageSize': 20,  # maximum is 100
     'apiKey': secret # your own API key
 }
