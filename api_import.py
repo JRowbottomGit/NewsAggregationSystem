@@ -10,10 +10,11 @@ url = 'https://newsapi.org/v2/everything?'
 
 # Specify the query and number of returns
 parameters = {
-    'q': 'War', #'Gold', #'natural language processing', #'Trump', #'big data', # query phrase
+    'q': 'Iran', #'War', #'Gold', #'natural language processing', #'Trump', #'big data', # query phrase
     'pageSize': 20,  # maximum is 100
     'apiKey': secret # your own API key
 }
+
 
 # Make the request
 response = requests.get(url, params=parameters)
@@ -45,3 +46,4 @@ plt.figure()
 plt.imshow(wordcloud, interpolation="bilinear")
 plt.axis("off")
 plt.show()
+wordcloud.to_file("test.png")
