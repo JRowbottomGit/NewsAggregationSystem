@@ -1,5 +1,6 @@
 
 #https://bigl.es/friday-fun-get-the-news-with-rss-and-gui-zero/
+#https://sourceforge.net/projects/xming/ for windows 10 ubuntu gui
 
 import feedparser
 from guizero import App, Text, Picture, PushButton
@@ -11,7 +12,9 @@ app = App(title="News Roundup", width=700, height=450)
 
 #BBC_Logo = Picture(app, image="bbcnews.gif")
 for i in range(3):
-    Text(app, text = BBCnews["entries"][i]["title"], size=16, font="Arial", color="black")
+    #Text(app, text = BBCnews["entries"][i]["title"], size=16, font="Arial", color="black")
+    print(BBCnews["entries"][i][""])
+    #Text(app, text = BBCnews["entries"][i]["content"][0].value, size=16, font="Arial", color="black")
 
 #SKY_Logo = Picture(app, image="sky-news-logo.gif")
 for i in range(3):
