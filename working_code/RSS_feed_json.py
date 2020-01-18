@@ -24,7 +24,7 @@ Creates RSS_data dictionary of the following form:
                                             "story" :
                                         }
                                 }
-            "business" :        {...
+                "business" :    {...
                                 ...}
     "Guardian":{...
     }
@@ -36,7 +36,7 @@ for key,value in URL_RSS.URL_RSS_dict['BBC'].items():
     news_rss = feedparser.parse(value[1])
 
     RSS_data['BBC'][key] = {}
-    for i in range(10):
+    for i in range(10):                         #####################################change this to the length of each topic
         id = news_rss['entries'][i]['id']
         RSS_data['BBC'][key][id] = {}
         RSS_data['BBC'][key][id]['link'] = news_rss['entries'][i]['link']
