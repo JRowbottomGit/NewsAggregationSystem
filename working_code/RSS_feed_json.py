@@ -1,8 +1,6 @@
 #https://bigl.es/friday-fun-get-the-news-with-rss-and-gui-zero/
 #https://sourceforge.net/projects/xming/ for windows 10 ubuntu gui
-
 import feedparser
-from guizero import App, Text, Picture, PushButton
 import json
 import URL_RSS
 import BBC_scraper
@@ -39,11 +37,12 @@ for key,value in URL_RSS.URL_RSS_dict['BBC'].items():
     for i in range(10):                         #####################################change this to the length of each topic
         id = news_rss['entries'][i]['id']
         RSS_data['BBC'][key][id] = {}
-        RSS_data['BBC'][key][id]['link'] = news_rss['entries'][i]['link']
+        url = news_rss['entries'][i]['link']
+        RSS_data['BBC'][key][id]['link'] = url
         RSS_data['BBC'][key][id]['title'] = news_rss['entries'][i]['title']
         RSS_data['BBC'][key][id]['published'] = news_rss['entries'][i]['published']
         RSS_data['BBC'][key][id]['summary'] = news_rss['entries'][i]['summary']
-        RSS_data['BBC'][key][id]['story'] = BBC_scraper.BBC_scrape(RSS_data['BBC'][key][id]['link'])
+        RSS_data['BBC'][key][id]['story'] = BBC_scraper.BBC_scrape(url)
 
 
 with open('RSS_data.json', 'w') as f:
