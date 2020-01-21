@@ -41,7 +41,7 @@ def GetFullTextForGuardian(url:str) ->str:
         sttrr = sttrr + result[ele] +"\n"
     return sttrr
 
-def GetFullTextForIn(url:str) ->str:
+def GetFullTextForABC(url:str) ->str:
     # print(1)
     r1 = requests.get(url)
     tree = html.fromstring(r1.text)
