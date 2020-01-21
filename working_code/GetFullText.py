@@ -12,7 +12,7 @@ def GetFullTextForBBC(url:str) ->str:
         if result[ele][0].isupper() or result[ele][0] == '"':
             sttrr = sttrr + result[ele] +"\n"
         else:
-            sttrr = sttrr[:-1] + result1[j] + result[ele] +"\n"
+            sttrr = sttrr[:-1] + result[ele] +"\n"   #result1[j]
             j = j+1
     return sttrr
 
