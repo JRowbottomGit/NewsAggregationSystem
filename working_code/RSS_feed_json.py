@@ -42,6 +42,7 @@ for key,value in URL_RSS.URL_RSS_dict['BBC'].items():
         id = news_rss['entries'][i]['id']
         RSS_data['BBC'][key][id] = {}
         url = news_rss['entries'][i]['link']
+        print(url)
         RSS_data['BBC'][key][id]['link'] = url
         RSS_data['BBC'][key][id]['title'] = news_rss['entries'][i]['title']
         RSS_data['BBC'][key][id]['published'] = news_rss['entries'][i]['published']
