@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>{{ current_user.username }}, choose a news outlet!</h1>
+    {% if form %}
+    <form action="" method="post">
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.post.label }}<br>
+            {{ form.post(cols=32, rows=4) }}<br>
+            {% for error in form.post.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>{{ form.submit() }}</p>
+    </form>
+    {% endif %}
+    <body>
+    <p>
+    Choose your favourite news categories:
+    </p>
+    <!-- {% for category in news %}
+        {% include '_news.html' %}
+    {% endfor %} -->
+    {% include '_news.html' %}
+  </body>
+{% endblock %}

@@ -1,0 +1,119 @@
+2020-01-29 00:28:36,928 ERROR: Exception on /news_sites [GET] [in /Users/alfredtingey/news_agg_app/venv/lib/python3.7/site-packages/flask/app.py:1891]
+Traceback (most recent call last):
+  File "/Users/alfredtingey/news_agg_app/venv/lib/python3.7/site-packages/flask/app.py", line 2446, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/alfredtingey/news_agg_app/venv/lib/python3.7/site-packages/flask/app.py", line 1951, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/alfredtingey/news_agg_app/venv/lib/python3.7/site-packages/flask/app.py", line 1820, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/alfredtingey/news_agg_app/venv/lib/python3.7/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/Users/alfredtingey/news_agg_app/venv/lib/python3.7/site-packages/flask/app.py", line 1949, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/alfredtingey/news_agg_app/venv/lib/python3.7/site-packages/flask/app.py", line 1935, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/alfredtingey/news_agg_app/venv/lib/python3.7/site-packages/flask_login/utils.py", line 261, in decorated_view
+    return func(*args, **kwargs)
+  File "/Users/alfredtingey/news_agg_app/app/routes.py", line 160, in news_sites
+    news = news_agg.get_news()
+  File "/Users/alfredtingey/news_agg_app/app/models.py", line 72, in get_news
+    data = json.load('/Users/alfredtingey/news_agg_app_cloned/working_code/RSS_data.json')
+  File "/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/json/__init__.py", line 293, in load
+    return loads(fp.read(),
+AttributeError: 'str' object has no attribute 'read'
+2020-01-29 00:31:54,391 INFO: Microblog startup [in /Users/alfredtingey/news_agg_app/app/__init__.py:46]
+2020-01-29 00:32:21,102 ERROR: Exception on /news_sites [GET] [in /Users/alfredtingey/news_agg_app/venv/lib/python3.7/site-packages/flask/app.py:1891]
+Traceback (most recent call last):
+  File "/Users/alfredtingey/news_agg_app/venv/lib/python3.7/site-packages/flask/app.py", line 2446, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/alfredtingey/news_agg_app/venv/lib/python3.7/site-packages/flask/app.py", line 1951, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/alfredtingey/news_agg_app/venv/lib/python3.7/site-packages/flask/app.py", line 1820, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/alfredtingey/news_agg_app/venv/lib/python3.7/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/Users/alfredtingey/news_agg_app/venv/lib/python3.7/site-packages/flask/app.py", line 1949, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/alfredtingey/news_agg_app/venv/lib/python3.7/site-packages/flask/app.py", line 1935, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/alfredtingey/news_agg_app/venv/lib/python3.7/site-packages/flask_login/utils.py", line 261, in decorated_view
+    return func(*args, **kwargs)
+  File "/Users/alfredtingey/news_agg_app/app/routes.py", line 162, in news_sites
+    next_url=next_url, prev_url=prev_url)
+NameError: name 'next_url' is not defined
+2020-01-29 00:33:05,648 INFO: Microblog startup [in /Users/alfredtingey/news_agg_app/app/__init__.py:46]
+2020-01-29 00:45:06,417 INFO: Microblog startup [in /Users/alfredtingey/news_agg_app/app/__init__.py:46]
+2020-01-29 00:45:10,820 ERROR: Exception on /news_sites [GET] [in /Users/alfredtingey/news_agg_app/venv/lib/python3.7/site-packages/flask/app.py:1891]
+Traceback (most recent call last):
+  File "/Users/alfredtingey/news_agg_app/venv/lib/python3.7/site-packages/flask/app.py", line 2446, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/alfredtingey/news_agg_app/venv/lib/python3.7/site-packages/flask/app.py", line 1951, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/alfredtingey/news_agg_app/venv/lib/python3.7/site-packages/flask/app.py", line 1820, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/alfredtingey/news_agg_app/venv/lib/python3.7/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/Users/alfredtingey/news_agg_app/venv/lib/python3.7/site-packages/flask/app.py", line 1949, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/alfredtingey/news_agg_app/venv/lib/python3.7/site-packages/flask/app.py", line 1935, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/alfredtingey/news_agg_app/venv/lib/python3.7/site-packages/flask_login/utils.py", line 261, in decorated_view
+    return func(*args, **kwargs)
+  File "/Users/alfredtingey/news_agg_app/app/routes.py", line 161, in news_sites
+    outlet = list(data.keys())[0]
+NameError: name 'data' is not defined
+2020-01-29 00:45:51,008 INFO: Microblog startup [in /Users/alfredtingey/news_agg_app/app/__init__.py:46]
+2020-01-29 00:47:26,098 INFO: Microblog startup [in /Users/alfredtingey/news_agg_app/app/__init__.py:46]
+2020-01-29 00:50:04,414 INFO: Microblog startup [in /Users/alfredtingey/news_agg_app/app/__init__.py:46]
+2020-01-29 00:55:26,976 INFO: Microblog startup [in /Users/alfredtingey/news_agg_app/app/__init__.py:46]
+2020-01-29 00:55:40,054 ERROR: Exception on /news_sites [GET] [in /Users/alfredtingey/news_agg_app/venv/lib/python3.7/site-packages/flask/app.py:1891]
+Traceback (most recent call last):
+  File "/Users/alfredtingey/news_agg_app/venv/lib/python3.7/site-packages/flask/app.py", line 2446, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/alfredtingey/news_agg_app/venv/lib/python3.7/site-packages/flask/app.py", line 1951, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/alfredtingey/news_agg_app/venv/lib/python3.7/site-packages/flask/app.py", line 1820, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/alfredtingey/news_agg_app/venv/lib/python3.7/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/Users/alfredtingey/news_agg_app/venv/lib/python3.7/site-packages/flask/app.py", line 1949, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/alfredtingey/news_agg_app/venv/lib/python3.7/site-packages/flask/app.py", line 1935, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/alfredtingey/news_agg_app/venv/lib/python3.7/site-packages/flask_login/utils.py", line 261, in decorated_view
+    return func(*args, **kwargs)
+  File "/Users/alfredtingey/news_agg_app/app/routes.py", line 171, in news_sites
+    return render_template("news_sites.html", title='News', news=categories.items)
+  File "/Users/alfredtingey/news_agg_app/venv/lib/python3.7/site-packages/flask/templating.py", line 140, in render_template
+    ctx.app,
+  File "/Users/alfredtingey/news_agg_app/venv/lib/python3.7/site-packages/flask/templating.py", line 120, in _render
+    rv = template.render(context)
+  File "/Users/alfredtingey/news_agg_app/venv/lib/python3.7/site-packages/jinja2/asyncsupport.py", line 76, in render
+    return original_render(self, *args, **kwargs)
+  File "/Users/alfredtingey/news_agg_app/venv/lib/python3.7/site-packages/jinja2/environment.py", line 1008, in render
+    return self.environment.handle_exception(exc_info, True)
+  File "/Users/alfredtingey/news_agg_app/venv/lib/python3.7/site-packages/jinja2/environment.py", line 780, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/alfredtingey/news_agg_app/venv/lib/python3.7/site-packages/jinja2/_compat.py", line 37, in reraise
+    raise value.with_traceback(tb)
+  File "/Users/alfredtingey/news_agg_app/app/templates/news_sites.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "/Users/alfredtingey/news_agg_app/venv/lib/python3.7/site-packages/jinja2/environment.py", line 1005, in render
+    return concat(self.root_render_func(self.new_context(vars)))
+  File "/Users/alfredtingey/news_agg_app/app/templates/news_sites.html", line 14, in root
+    </p>
+  File "/Users/alfredtingey/news_agg_app/app/templates/base.html", line 56, in root
+  File "/Users/alfredtingey/news_agg_app/app/templates/news_sites.html", line 44, in block_content
+TypeError: 'builtin_function_or_method' object is not iterable
+2020-01-29 00:56:48,830 INFO: Microblog startup [in /Users/alfredtingey/news_agg_app/app/__init__.py:46]
+2020-01-29 00:58:02,216 INFO: Microblog startup [in /Users/alfredtingey/news_agg_app/app/__init__.py:46]
+2020-01-29 01:00:36,547 INFO: Microblog startup [in /Users/alfredtingey/news_agg_app/app/__init__.py:46]
+2020-01-29 01:01:52,263 INFO: Microblog startup [in /Users/alfredtingey/news_agg_app/app/__init__.py:46]
+2020-01-29 01:04:51,630 INFO: Microblog startup [in /Users/alfredtingey/news_agg_app/app/__init__.py:46]
+2020-01-29 13:07:21,743 INFO: Microblog startup [in /Users/alfredtingey/news_agg_app/app/__init__.py:46]
+2020-01-29 14:01:43,224 INFO: Microblog startup [in /Users/alfredtingey/news_agg_app/app/__init__.py:46]
+2020-01-29 14:04:09,799 INFO: Microblog startup [in /Users/alfredtingey/news_agg_app/app/__init__.py:46]
+2020-01-29 14:07:05,294 INFO: Microblog startup [in /Users/alfredtingey/news_agg_app/app/__init__.py:46]
+2020-01-29 15:35:35,290 INFO: Microblog startup [in /Users/alfredtingey/news_agg_app/app/__init__.py:46]
+2020-01-29 15:58:15,712 INFO: Microblog startup [in /Users/alfredtingey/news_agg_app/app/__init__.py:46]
+2020-01-29 16:11:09,840 INFO: Microblog startup [in /Users/alfredtingey/news_agg_app/app/__init__.py:46]
