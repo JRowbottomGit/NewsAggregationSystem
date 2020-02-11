@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>{{ current_user.username }}, now is {{category}}</h1>
+    {% if form %}
+    <form action="" method="post">
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.post.label }}<br>
+            {{ form.post(cols=32, rows=4) }}<br>
+            {% for error in form.post.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>{{ form.submit() }}</p>
+    </form>
+    {% endif %}
+    <body>
+    	<p>news for {{category}}
+						<br>
+						<br>
+						{%for item in news%}
+								News Title:
+								<br>
+								{{item[1]}}
+								<br>
+								<br>
+								Summary:
+								<br>
+								<br>
+								{{item[2]}}
+								<br>
+								<br>
+								News:
+								<br>
+								<br>
+								{{item[0]}}
+								<br>
+								<br>
+						{%endfor%}
+						<br>
+  </body>
+{% endblock %}
