@@ -18,24 +18,13 @@
     <body>
     	<p>news for {{category}}
 						<br>
-						<br>
 						{%for item in news%}
-								News Title:
+        <br>
+        News Title: {{item[1]}}
 								<br>
-								{{item[1]}}
+								Summary: {{item[2]}}
 								<br>
-								<br>
-								Summary:
-								<br>
-								<br>
-								{{item[2]}}
-								<br>
-								<br>
-								News:
-								<br>
-								<br>
-								{{item[0]}}
-								<br>
+								Link: <a href={{item[0]}}>{{item[0]}}</a>
 								<br>
 						{%endfor%}
 						<br>
