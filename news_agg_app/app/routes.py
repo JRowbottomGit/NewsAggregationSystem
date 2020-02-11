@@ -152,7 +152,7 @@ def explore():
         if posts.has_prev else None
     return render_template("index.html", title='Explore', posts=posts.items,
                           next_url=next_url, prev_url=prev_url)
-
+                          
 @app.route('/news_sites')
 @login_required
 def news_sites():
@@ -163,20 +163,50 @@ def news_sites():
     count = 1
     categories = []
     # categories = dict()
-    for category in news[outlet]:
-        #print(f'{count}: {category}')
-        categories.append(category)
-        # categories[count] = 'category'
-        count+=1
     stories = []
+    nice_dict = dict()
     for category in news[outlet]:
+        categories.append(category)
         for story in news[outlet][category]:
-            stories.append(story)
-    titles = []
+            link = news[outlet][category][story]['link']
+            title = news[outlet][category][story]['title']
+            summary = news[outlet][category][story]['summary']
+            stories.append((category,link,title,summary))
+        new_list = []
+        for item in stories:
+            if item[0] == category:
+                coupled = (item[1],item[2],item[3])
+                new_list.append(coupled)
+        nice_dict[category[0].upper() +category[1:]] = new_list
 
-    for category in news[outlet]:
-        for story in news[outlet][category]:
-            # for title in news[outlet][category][story]['title']:
-            titles.append(news[outlet][category][story]['title'])
+    return render_template("news_sites.html", title='News', story_news = nice_dict, categories_new = categories)
 
-    return render_template("news_sites.html", title='News', news=categories, story_news = stories, title_news = titles)
+
+@app.route('/category/<category>')
+@login_required
+def category(category):
+    aaa = category
+    news_agg = News_agg()
+    news = news_agg.get_news()
+    outlet = list(news.keys())[0]
+    print(f'News outlet: {outlet}')
+    count = 1
+
+    # categories = dict()
+    stories = []
+    nice_dict = dict()
+
+    category = category.lower()
+    for story in news[outlet][category]:
+        link = news[outlet][category][story]['link']
+        title = news[outlet][category][story]['title']
+        summary = news[outlet][category][story]['summary']
+        stories.append((category,link,title,summary))
+    new_list = []
+    for item in stories:
+        if item[0] == category:
+            coupled = (item[1],item[2],item[3])
+            new_list.append(coupled)
+
+
+    return render_template("category.html", category = aaa, news = new_list)
