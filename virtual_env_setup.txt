@@ -1,0 +1,27 @@
+## Virtual environment
+source venv/bin/activate  # To launch in the project directory
+python torch_example.py  # To launch the pytorch example script
+python starter_code.py  # To launch the coursework script
+deactivate
+
+#or via web
+http://www.doc.ic.ac.uk/project/2019/545/g1954505/
+
+
+## Virtual machine
+ssh username@hostname.doc.ic.ac.uk
+ssh jr1419@cloud-vm-42-66.doc.ic.ac.uk
+
+##Directory
+/vol/project/2019/545/g1954505
+
+
+#order of commands
+ssh jr1419@cloud-vm-42-66.doc.ic.ac.uk
+cd /vol/project/2019/545/g1954505
+source venv/bin/activate
+
+
+
+yyyymmdd_news.json
+
