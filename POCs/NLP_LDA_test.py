@@ -88,7 +88,7 @@ class LDA_model(NLP_model):
     def __init__(self):
         super().__init__()
 
-    def train_lda_model(self, bow_corpus):
+    def train_lda_model(self, bow_corpus, save_name = None):
         #https://radimrehurek.com/gensim/models/ldamulticore.html
         self.model =  gensim.models.LdaMulticore(bow_corpus,
                                            num_topics = 8,
@@ -97,11 +97,12 @@ class LDA_model(NLP_model):
                                            workers = 2)
 
         #Save model to disk.
-        temp_file = "/vol/project/2019/545/g1954505/news-aggregation-system/LDA_model"
-        #temp_file = datapath("model")
+        #save_name = "/vol/project/2019/545/g1954505/news-aggregation-system/LDA_models/LDA_model_politics"
+        save_name = "/vol/project/2019/545/g1954505/news-aggregation-system/LDA_models/LDA_model"
+        #save_name = datapath("model")
         print("saving here")
-        print(temp_file)
-        self.model.save(temp_file)
+        print(save_name)
+        self.model.save(save_name)
 
 
     def news_topics(self):
@@ -111,6 +112,7 @@ class LDA_model(NLP_model):
         returns the (RSS_summary,topics)
         '''
         news_history_path = "/vol/project/2019/545/g1954505/news-aggregation-system/working_code/news_history.json"
+        #need to point this at news_archive
         with open(news_history_path, "r") as f:
             news_history = json.load(f)
 
@@ -127,7 +129,8 @@ class LDA_model(NLP_model):
 
             topisised_stories[key] =(value["title"],topic_string)
 
-        topics = "/vol/project/2019/545/g1954505/news-aggregation-system/working_code/topics.json"
+        #topics = "/vol/project/2019/545/g1954505/news-aggregation-system/news_archive/topics_politics.json"
+        topics = "/vol/project/2019/545/g1954505/news-aggregation-system/news_archive/topics.json"
 
         with open(topics, "w") as f:
             json.dump(topisised_stories, f)
@@ -138,30 +141,62 @@ if __name__ == "__main__":
     #intitalise the LDA Classifier
     LDA = LDA_model()
     #add the news 20 data as training/test data
-    data_home = "/vol/project/2019/545/g1954505/news-aggregation-system"
-    newsgroups_train = fetch_20newsgroups(data_home = data_home, subset='train', shuffle = True)
+    data_home = "/vol/project/2019/545/g1954505/news-aggregation-system/news_archive"
+    #newsgroups_train = fetch_20newsgroups(data_home = data_home, subset='train', shuffle = True)
+    # categories = [
+    #                 # 'alt.atheism',
+    #                 #  'comp.graphics',
+    #                 #  'comp.os.ms-windows.misc',
+    #                 #  'comp.sys.ibm.pc.hardware',
+    #                 #  'comp.sys.mac.hardware',
+    #                 #  'comp.windows.x',
+    #                 #  'misc.forsale',
+    #                 #  'rec.autos',
+    #                 #  'rec.motorcycles',
+    #                 #  'rec.sport.baseball',
+    #                 #  'rec.sport.hockey',
+    #                 #  'sci.crypt',
+    #                 #  'sci.electronics',
+    #                 #  'sci.med',
+    #                 #  'sci.space',
+    #                 #  'soc.religion.christian',
+    #                 #  'talk.politics.guns',
+    #                 #  'talk.politics.mideast',
+    #                  'talk.politics.misc'#,
+    #                  # 'talk.religion.misc'
+    #                  ]
+    #newsgroups_train_politics = fetch_20newsgroups(data_home = data_home, subset='train', categories=categories, shuffle = True)
+    newsgroups_train_politics = fetch_20newsgroups(data_home = data_home, subset='train', shuffle = True)
     newsgroups_test = fetch_20newsgroups(data_home = data_home, subset='test', shuffle = True)
 
     #preprocess and save as gensim.corpora.Dictionary
-    LDA.preprocess_story_list(newsgroups_train.data)
+    #LDA.preprocess_story_list(newsgroups_train.data)
+    LDA.preprocess_story_list(newsgroups_train_politics.data)
     LDA.dict_to_BoW()
     #LDA.dictionary.filter_extremes(no_below=15, no_above=0.1, keep_n= 100000)
 
     #train the LDA Classifier
-    #LDA.train_lda_model(LDA.bow_corpus)
+    LDA.train_lda_model(LDA.bow_corpus)
 
 # Load a potentially pretrained model from disk.
-    temp_file = "/vol/project/2019/545/g1954505/news-aggregation-system/LDA_model"
-    LDA.model = LdaModel.load(temp_file)
+    LDA_file = "/vol/project/2019/545/g1954505/news-aggregation-system/LDA_models/LDA_model"
+    #LDA_file = "/vol/project/2019/545/g1954505/news-aggregation-system/LDA_models/LDA_model_politics"
+    LDA.model = LdaModel.load(LDA_file)
 
     #test point
-    num = 100
-    unseen_document = newsgroups_test.data[num]
-    #print(unseen_document)
-    # Data preprocessing step for the unseen document
-    bow_vector = LDA.dictionary.doc2bow(LDA.preprocess(unseen_document))
-
-    for index, score in sorted(LDA.model[bow_vector], key=lambda tup: -1*tup[1]):
-        print("Score: {}\t Topic: {}".format(score, LDA.model.print_topic(index, 5)))
+    # num = 100
+    # unseen_document = newsgroups_test.data[num]
+    # #print(unseen_document)
+    # # Data preprocessing step for the unseen document
+    # bow_vector = LDA.dictionary.doc2bow(LDA.preprocess(unseen_document))
+    #
+    # for index, score in sorted(LDA.model[bow_vector], key=lambda tup: -1*tup[1]):
+    #     print("Score: {}\t Topic: {}".format(score, LDA.model.print_topic(index, 5)))
 
     LDA.news_topics()
+    topics = "/vol/project/2019/545/g1954505/news-aggregation-system/news_archive/topics.json"
+    #topics = "/vol/project/2019/545/g1954505/news-aggregation-system/news_archive/topics_politics.json"
+    with open(topics, "r") as f:
+        data = json.load(f)
+    json_string = json.dumps(data, indent=4)#, sort_keys=True))
+    print(json_string)
