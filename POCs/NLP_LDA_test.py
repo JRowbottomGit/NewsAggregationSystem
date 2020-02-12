@@ -7,6 +7,7 @@ from gensim.parsing.preprocessing import STOPWORDS
 from gensim.test.utils import datapath
 from gensim.models import LdaModel
 
+
 from nltk.stem import WordNetLemmatizer, SnowballStemmer
 from nltk.stem.porter import *
 import numpy as np
@@ -41,7 +42,7 @@ class NLP_model(object):
     def split_train_test(self, test_size):
         """
 		split the data into training/testing data and labels
-		:param test-size: the percentage of the data that should be used for testing
+		:param test-size: the percentagdictionarye of the data that should be used for testing
         """
         X_train, X_test, y_train, y_test = train_test_split(self.X, self.y, test_size=test_size, random_state=42)
         return X_train, X_test, y_train, y_test
@@ -97,8 +98,8 @@ class LDA_model(NLP_model):
                                            workers = 2)
 
         #Save model to disk.
-        #save_name = "/vol/project/2019/545/g1954505/news-aggregation-system/LDA_models/LDA_model_politics"
-        save_name = "/vol/project/2019/545/g1954505/news-aggregation-system/LDA_models/LDA_model"
+        save_name = "/vol/project/2019/545/g1954505/news-aggregation-system/LDA_models/LDA_model_politics"
+        #save_name = "/vol/project/2019/545/g1954505/news-aggregation-system/LDA_models/LDA_model"
         #save_name = datapath("model")
         print("saving here")
         print(save_name)
@@ -129,11 +130,19 @@ class LDA_model(NLP_model):
 
             topisised_stories[key] =(value["title"],topic_string)
 
-        #topics = "/vol/project/2019/545/g1954505/news-aggregation-system/news_archive/topics_politics.json"
-        topics = "/vol/project/2019/545/g1954505/news-aggregation-system/news_archive/topics.json"
+        topics = "/vol/project/2019/545/g1954505/news-aggregation-system/news_archive/topics_politics.json"
+        #topics = "/vol/project/2019/545/g1954505/news-aggregation-system/news_archive/topics.json"
 
         with open(topics, "w") as f:
             json.dump(topisised_stories, f)
+
+    def print_topics(self):
+        #topics = "/vol/project/2019/545/g1954505/news-aggregation-system/news_archive/topics.json"
+        topics = "/vol/project/2019/545/g1954505/news-aggregation-system/news_archive/topics_politics.json"
+        with open(topics, "r") as f:
+            data = json.load(f)
+        json_string = json.dumps(data, indent=4)#, sort_keys=True))
+        print(json_string)
 
 
 if __name__ == "__main__":
@@ -169,16 +178,18 @@ if __name__ == "__main__":
     newsgroups_train_politics = fetch_20newsgroups(data_home = data_home, subset='train', shuffle = True)
     newsgroups_test = fetch_20newsgroups(data_home = data_home, subset='test', shuffle = True)
 
-    #preprocess and save as gensim.corpora.Dictionary
-    #LDA.preprocess_story_list(newsgroups_train.data)
+
+# Preprocess and save news data as gensim.corpora.Dictionary attribute of LDA model
+    # LDA.preprocess_story_list(newsgroups_train.data)
     LDA.preprocess_story_list(newsgroups_train_politics.data)
     LDA.dict_to_BoW()
+
     #LDA.dictionary.filter_extremes(no_below=15, no_above=0.1, keep_n= 100000)
 
-    #train the LDA Classifier
-    LDA.train_lda_model(LDA.bow_corpus)
+# train the LDA Classifier
+    #LDA.train_lda_model(LDA.bow_corpus)
 
-# Load a potentially pretrained model from disk.
+# Load a pretrained model from disk.
     LDA_file = "/vol/project/2019/545/g1954505/news-aggregation-system/LDA_models/LDA_model"
     #LDA_file = "/vol/project/2019/545/g1954505/news-aggregation-system/LDA_models/LDA_model_politics"
     LDA.model = LdaModel.load(LDA_file)
@@ -194,9 +205,4 @@ if __name__ == "__main__":
     #     print("Score: {}\t Topic: {}".format(score, LDA.model.print_topic(index, 5)))
 
     LDA.news_topics()
-    topics = "/vol/project/2019/545/g1954505/news-aggregation-system/news_archive/topics.json"
-    #topics = "/vol/project/2019/545/g1954505/news-aggregation-system/news_archive/topics_politics.json"
-    with open(topics, "r") as f:
-        data = json.load(f)
-    json_string = json.dumps(data, indent=4)#, sort_keys=True))
-    print(json_string)
+    LDA.print_topics()
