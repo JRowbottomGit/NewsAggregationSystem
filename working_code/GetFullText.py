@@ -26,9 +26,18 @@ def GetFullTextForBBC(url:str) ->str:
                 # print(result[ele])
                 sttrr = sttrr[:-1] + result1[j] + result[ele] +"\n"
                 j = j+1
-
     return sttrr
 
+def GetFullTextForBBCSimple(url:str) ->str:
+    r1 = requests.get(url)
+    tree = html.fromstring(r1.text)
+    result = tree.xpath('//div[@class = "story-body__inner"]//p/text()')
+    result1 = tree.xpath('//div[@class = "story-body__inner"]//p//a/text()')
+    sttrr = ''
+    result = result + result1 
+    for ele in range(len(result)):
+        sttrr = sttrr + result[ele] +"\n"
+    return sttrr
 
 
 def GetFullTextForGuardian(url:str) ->str:
