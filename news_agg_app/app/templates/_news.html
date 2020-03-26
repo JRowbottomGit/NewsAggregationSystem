@@ -1,34 +1,10 @@
-<table>
-     <tr valign="top">
-         <td>
-           <br>
+<table class="table table-hover">
+     <tr>
+         <td width="70px">
              {%for category in story_news%}
                <br>
-               <br>czr<br>
                <a href="{{ url_for('category', category=category) }}">{{category}}
                </a>
-               <br>czr<br>
-               <br>
-               <br>
-               {%for item in story_news[category]%}
-                   News Title:
-                   <br>
-                   {{item[1]}}
-                   <br>
-                   <br>
-                   Summary:
-                   <br>
-                   <br>
-                   {{item[2]}}
-                   <br>
-                   <br>
-                   News:
-                   <br>
-                   <br>
-                   {{item[0]}}
-                   <br>
-                   <br>
-               {%endfor%}
                <br>
              {%endfor%}
            <br>

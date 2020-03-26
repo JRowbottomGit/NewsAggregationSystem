@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
-{% block content %}
-    <h1>{{ current_user.username }}, now is {{category}}</h1>
+{% block app_content %}
+    <h1>{{category}}</h1>
     {% if form %}
     <form action="" method="post">
         {{ form.hidden_tag() }}
@@ -16,7 +16,7 @@
     </form>
     {% endif %}
     <body>
-    	<p>news for {{category}}
+    	<p>Latest News In {{category}}:
 						<br>
 						{%for item in news%}
         <br>
@@ -24,7 +24,7 @@
 								<br>
 								Summary: {{item[2]}}
 								<br>
-								Link: <a href={{item[0]}}>{{item[0]}}</a>
+								<a href={{item[0]}}>{{item[0]}}</a>
 								<br>
 						{%endfor%}
 						<br>
