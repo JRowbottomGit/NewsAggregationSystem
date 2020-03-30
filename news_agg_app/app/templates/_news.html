@@ -1,13 +1,13 @@
+
+{%for category in story_news%}
 <table class="table table-hover">
      <tr>
-         <td width="70px">
-             {%for category in story_news%}
+         <td width="20px">
                <br>
-               <a href="{{ url_for('category', category=category) }}">{{category}}
-               </a>
+               <font size="4"><a href="{{ url_for('category2', category=category) }}">{{category}}</a></font>
                <br>
-             {%endfor%}
            <br>
          </td>
      </tr>
+{%endfor%}
  </table>

@@ -2,8 +2,8 @@
 #https://sourceforge.net/projects/xming/ for windows 10 ubuntu gui
 import feedparser
 import json
-import URL_RSS
-import GetFullText
+import working_code.URL_RSS
+import working_code.GetFullText
 # import time
 import datetime
 

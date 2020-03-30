@@ -12,7 +12,12 @@ from app.forms import RegistrationForm
 from datetime import datetime
 from app.forms import EditProfileForm
 from app.forms import PostForm
-from app.models import Post, News_agg
+from app.models import Post, News_agg, News
+from app import json2db
+
+from PIL import Image
+import urllib
+import urllib.request
 
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/index', methods=['GET', 'POST'])
@@ -152,61 +157,213 @@ def explore():
         if posts.has_prev else None
     return render_template("index.html", title='Explore', posts=posts.items,
                           next_url=next_url, prev_url=prev_url)
-                          
+
 @app.route('/news_sites')
 @login_required
 def news_sites():
     news_agg = News_agg()
     news = news_agg.get_news()
-    outlet = list(news.keys())[0]
-    print(f'News outlet: {outlet}')
-    count = 1
     categories = []
     # categories = dict()
     stories = []
     nice_dict = dict()
-    for category in news[outlet]:
-        categories.append(category)
-        for story in news[outlet][category]:
-            link = news[outlet][category][story]['link']
-            title = news[outlet][category][story]['title']
-            summary = news[outlet][category][story]['summary']
-            stories.append((category,link,title,summary))
-        new_list = []
-        for item in stories:
-            if item[0] == category:
-                coupled = (item[1],item[2],item[3])
-                new_list.append(coupled)
-        nice_dict[category[0].upper() +category[1:]] = new_list
+
+    ### Below commented out is for the dictionary with a date at the top ###
+
+    # for date in news.keys():
+    #     for outlet in news[date]:
+    #         print(f'News outlet: {outlet}')
+    #         for category in news[date][outlet]:
+    #             categories.append(category)
+    #             for story in news[date][outlet][category]:
+    #                 link = news[date][outlet][category][story]['link']
+    #                 title = news[date][outlet][category][story]['title']
+    #                 summary = news[date][outlet][category][story]['summary']
+    #                 stories.append((category,link,title,summary))
+    #             new_list = []
+    #             for item in stories:
+    #                 if item[0] == category:
+    #                     coupled = (item[1],item[2],item[3])
+    #                     new_list.append(coupled)
+    #             nice_dict[category[0].upper() +category[1:]] = new_list
+
+    for outlet in news:
+        print(f'News outlet: {outlet}')
+        for category in news[outlet]:
+            categories.append(category)
+            for story in news[outlet][category]:
+                link = news[outlet][category][story]['link']
+                title = news[outlet][category][story]['title']
+                summary = news[outlet][category][story]['summary']
+                stories.append((category,link,title,summary))
+            new_list = []
+            for item in stories:
+                if item[0] == category:
+                    coupled = (item[1],item[2],item[3])
+                    new_list.append(coupled)
+            nice_dict[category[0].upper() +category[1:]] = new_list
 
     return render_template("news_sites.html", title='News', story_news = nice_dict, categories_new = categories)
-
 
 @app.route('/category/<category>')
 @login_required
 def category(category):
+    ''' without using database create view 1'''
     aaa = category
+    print(f'category is {aaa}')
     news_agg = News_agg()
     news = news_agg.get_news()
-    outlet = list(news.keys())[0]
-    print(f'News outlet: {outlet}')
-    count = 1
 
-    # categories = dict()
     stories = []
     nice_dict = dict()
 
-    category = category.lower()
-    for story in news[outlet][category]:
-        link = news[outlet][category][story]['link']
-        title = news[outlet][category][story]['title']
-        summary = news[outlet][category][story]['summary']
-        stories.append((category,link,title,summary))
-    new_list = []
-    for item in stories:
-        if item[0] == category:
-            coupled = (item[1],item[2],item[3])
-            new_list.append(coupled)
+    ### this part is for the BBC scrape because the categories have lower case letters in the json file ###
 
+    #### This part for the Guardian etc. because categories are capitalised in the json file ####
+
+    ### Below is for the dictionary with a date ####
+
+    # category = category[0].upper() + category[1:]
+    # for date in news.keys():
+    #     outlet_relevant = list(news[date].keys())
+    #     for outlet in news[date]:
+    #         for category2 in news[date][outlet]:
+    #             for story in news[date][outlet][category2]:
+    #                 link = news[date][outlet][category2][story]['link']
+    #                 title = news[date][outlet][category2][story]['title']
+    #                 summary = news[date][outlet][category2][story]['summary']
+    #                 summary = ''.join(summary.split('<p>')).split('</p>')
+    #                 summary = ''.join(summary)
+    #                 if len(summary) > 200:
+    #                     summary = summary[0:200] + '...'
+    #                 # Put the outlet in... watch out below may be wrong
+    #                 stories.append((category2,link,title,summary, outlet_relevant[1]))
+    #             new_list_capitalised = []
+    #             for item in stories:
+    #                 if item[0] == category: # or category[0].upper() + category[1:]
+    #                     coupled = (item[1],item[2],item[3], item[4])
+    #                     new_list_capitalised.append(coupled)
+    #             new_list_capitalised.reverse()
+    #             new_list_capitalised = new_list_capitalised[0:100]
+
+    category = category[0].upper() + category[1:]
+
+    outlet_relevant = list(news.keys())
+    for outlet in news:
+        for category2 in news[outlet]:
+            for story in news[outlet][category2]:
+                link = news[outlet][category2][story]['link']
+                title = news[outlet][category2][story]['title']
+                # pic_url = news[outlet][category2][story]['pic']
+                # if pic_url is not None:
+                #     pic_filename, _ = urllib.request.urlretrieve(pic_url)
+                #     pic = Image.open(pic_filename)
+                summary = news[outlet][category2][story]['summary']
+                summary = ''.join(summary.split('<p>')).split('</p>')
+                summary = ''.join(summary)
+                if len(summary) > 200:
+                    summary = summary[0:200] + '...'
+                # Put the outlet in... watch out below may be wrong
+                stories.append((category2,link,title,summary, outlet_relevant[1]))
+    new_list_capitalised = []
+    for item in stories:
+        if item[0] == category: # or category[0].upper() + category[1:]
+            coupled = (item[1],item[2],item[3], item[4])
+            new_list_capitalised.append(coupled)
+    new_list_capitalised.reverse()
+    new_list_capitalised = new_list_capitalised[0:100]
+
+    ## Below is for when there is a date in the dictionary ####
+
+    # category = category.lower()
+    # for date in news.keys():
+    #     outlet_relevant = list(news[date].keys())
+    #     for outlet in news[date]:
+    #         for category2 in news[date][outlet]:
+    #             for story in news[date][outlet][category2]:
+    #                 link = news[date][outlet][category2][story]['link']
+    #                 title = news[date][outlet][category2][story]['title']
+    #                 summary = news[date][outlet][category2][story]['summary']
+    #                 summary = ''.join(summary.split('<p>')).split('</p>')
+    #                 summary = ''.join(summary)
+    #                 if len(summary) > 200:
+    #                     summary = summary[0:200] + '...'
+    #                 stories.append((category2,link,title,summary, outlet_relevant[0]))
+    #             new_list_lowercase = []
+    #             for item in stories:
+    #                 if item[0] == category: # or category[0].upper() + category[1:]
+    #                     coupled = (item[1],item[2],item[3], item[4])
+    #                     new_list_lowercase.append(coupled)
+    #             new_list_lowercase.reverse()
+    #             new_list_lowercase = new_list_lowercase[0:100]
+    # new_list =  new_list_lowercase + new_list_capitalised
+
+    category = category.lower()
+
+    outlet_relevant = list(news.keys())
+    for outlet in news:
+        for category2 in news[outlet]:
+            for story in news[outlet][category2]:
+                link = news[outlet][category2][story]['link']
+                title = news[outlet][category2][story]['title']
+                # pic_url = news[outlet][category2][story]['pic']
+                # if pic_url is not None:
+                #     pic_filename, _ = urllib.request.urlretrieve(pic_url)
+                #     pic = Image.open(pic_filename)
+                summary = news[outlet][category2][story]['summary']
+                summary = ''.join(summary.split('<p>')).split('</p>')
+                summary = ''.join(summary)
+                if len(summary) > 200:
+                    summary = summary[0:200] + '...'
+            stories.append((category2,link,title,summary, outlet_relevant[0]))
+    new_list_lowercase = []
+    for item in stories:
+        if item[0] == category: # or category[0].upper() + category[1:]
+            coupled = (item[1],item[2],item[3], item[4])
+            new_list_lowercase.append(coupled)
+    new_list_lowercase.reverse()
+    new_list_lowercase = new_list_lowercase[0:100]
+    new_list =  new_list_lowercase + new_list_capitalised
 
     return render_template("category.html", category = aaa, news = new_list)
+
+@app.route('/category2/<category>')
+@login_required
+def category2(category):
+    ''' create view 1 using database '''
+    aaa = category
+    json_path =  '/Users/alfredtingey/news-aggregation-system-Iteration3/news_archive/Backupnews_in_20200326.json'
+    json2db.dbimport(json_path)
+    #page = request.args.get('page', 1, type=int)
+    allnew = News.query.filter(News.category.startswith(category[0])).all()  #.paginate(page, 100, False)
+
+    ## If we want to add pages in uncomment below. Need to figure out pagination + post processing ##
+
+    # if allnew.has_next:
+    #     next_url = url_for('category2', category = category, page=allnew.next_num)
+    # else:
+    #     None
+    #
+    # if allnew.has_prev:
+    #     prev_url = url_for('category2', category = category, page=allnew.prev_num)
+    # else:
+    #     None
+
+    new_list = []
+    # print("now is test")
+    for new in list(allnew):
+        link = new.link
+        title = new.title
+        summary = new.summary
+        if len(summary) > 300:
+            summary = summary[0:300] + '...'
+        ## to deal with cartoons ##
+        elif 'cartoon' in title:
+            title = title.replace('- cartoon','')
+            summary = f'Cartoon: {title}'
+        outlet = new.outlet
+        new_list.append((link,title,summary,outlet))
+    new_list.reverse()
+
+    # print(new_list)
+    return render_template("category2.html", category = aaa, news = new_list[0:100])

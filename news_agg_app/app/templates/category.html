@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block app_content %}
-    <h1>{{category}}</h1>
+    <h1>Latest News In {{category}}</h1>
     {% if form %}
     <form action="" method="post">
         {{ form.hidden_tag() }}
@@ -16,17 +16,22 @@
     </form>
     {% endif %}
     <body>
-    	<p>Latest News In {{category}}:
-						<br>
 						{%for item in news%}
-        <br>
-        News Title: {{item[1]}}
-								<br>
-								Summary: {{item[2]}}
-								<br>
-								<a href={{item[0]}}>{{item[0]}}</a>
-								<br>
-						{%endfor%}
-						<br>
+            <table class="table table-hover">
+                 <tr>
+                   <td width="0px">
+                    <a href={{item[0]}}>{{item[1]}}</a>
+    								<br>
+    								{{item[2]}}
+                    <br>
+                    {{item[3]}}
+                    <br>
+                    <!-- <body>
+                    <img src={{item[5]}} alt="Simply Easy Learning" width="200" height="80">
+                     </body> -->
+                    </td>
+                  </tr>
+            </table>
+            {%endfor%}
   </body>
 {% endblock %}
