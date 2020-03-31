@@ -69,9 +69,20 @@ class Post(db.Model):
 class News_agg():
     # This will only work on my computer for the following file path
     def get_news(self):
-        with open('/Users/alfredtingey/news_agg_app_cloned/working_code/RSS_data.json','r') as f:
+        with open('/Users/alfredtingey/news-aggregation-system-Iteration3/news_archive/Backupnews_in_20200326.json','r') as f:
             data = json.load(f)
         return data
+
+class News(db.Model):
+    # date = db.Column(db.String(140))
+    outlet = db.Column(db.String(140))
+    category = db.Column(db.String(140))
+    title = db.Column(db.String(140), primary_key=True)
+    link = db.Column(db.String(140))
+    summary = db.Column(db.String(140))
+    # pic_link = db.Column(db.String(140))
+    # def __repr__(self):
+    #     return '<Post {}>'.format(self.body)
 
 @login.user_loader
 def load_user(id):

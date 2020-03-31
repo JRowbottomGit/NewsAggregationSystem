@@ -1,0 +1,100 @@
+2020-03-27 16:45:13,135 ERROR: Exception on /category2/Politics [GET] [in /Users/alfredtingey/news-aggregation-system-Iteration3/venv/lib/python3.7/site-packages/flask/app.py:1891]
+Traceback (most recent call last):
+  File "/Users/alfredtingey/news-aggregation-system-Iteration3/venv/lib/python3.7/site-packages/flask/app.py", line 2446, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/alfredtingey/news-aggregation-system-Iteration3/venv/lib/python3.7/site-packages/flask/app.py", line 1951, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/alfredtingey/news-aggregation-system-Iteration3/venv/lib/python3.7/site-packages/flask/app.py", line 1820, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/alfredtingey/news-aggregation-system-Iteration3/venv/lib/python3.7/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/Users/alfredtingey/news-aggregation-system-Iteration3/venv/lib/python3.7/site-packages/flask/app.py", line 1949, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/alfredtingey/news-aggregation-system-Iteration3/venv/lib/python3.7/site-packages/flask/app.py", line 1935, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/alfredtingey/news-aggregation-system-Iteration3/venv/lib/python3.7/site-packages/flask_login/utils.py", line 272, in decorated_view
+    return func(*args, **kwargs)
+  File "/Users/alfredtingey/news-aggregation-system-Iteration3/news_agg_app/app/routes.py", line 340, in category2
+    if posts.has_next else None
+NameError: name 'posts' is not defined
+2020-03-27 16:46:01,397 INFO: News Aggregation startup [in /Users/alfredtingey/news-aggregation-system-Iteration3/news_agg_app/app/__init__.py:49]
+2020-03-27 16:46:05,163 ERROR: Exception on /category2/Politics [GET] [in /Users/alfredtingey/news-aggregation-system-Iteration3/venv/lib/python3.7/site-packages/flask/app.py:1891]
+Traceback (most recent call last):
+  File "/Users/alfredtingey/news-aggregation-system-Iteration3/venv/lib/python3.7/site-packages/flask/app.py", line 2446, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/alfredtingey/news-aggregation-system-Iteration3/venv/lib/python3.7/site-packages/flask/app.py", line 1951, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/alfredtingey/news-aggregation-system-Iteration3/venv/lib/python3.7/site-packages/flask/app.py", line 1820, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/alfredtingey/news-aggregation-system-Iteration3/venv/lib/python3.7/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/Users/alfredtingey/news-aggregation-system-Iteration3/venv/lib/python3.7/site-packages/flask/app.py", line 1949, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/alfredtingey/news-aggregation-system-Iteration3/venv/lib/python3.7/site-packages/flask/app.py", line 1935, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/alfredtingey/news-aggregation-system-Iteration3/venv/lib/python3.7/site-packages/flask_login/utils.py", line 272, in decorated_view
+    return func(*args, **kwargs)
+  File "/Users/alfredtingey/news-aggregation-system-Iteration3/news_agg_app/app/routes.py", line 340, in category2
+    if allnew.has_next else None
+NameError: name 'allnews' is not defined
+2020-03-27 16:46:32,839 INFO: News Aggregation startup [in /Users/alfredtingey/news-aggregation-system-Iteration3/news_agg_app/app/__init__.py:49]
+2020-03-27 16:46:35,314 ERROR: Exception on /category2/Politics [GET] [in /Users/alfredtingey/news-aggregation-system-Iteration3/venv/lib/python3.7/site-packages/flask/app.py:1891]
+Traceback (most recent call last):
+  File "/Users/alfredtingey/news-aggregation-system-Iteration3/venv/lib/python3.7/site-packages/flask/app.py", line 2446, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/alfredtingey/news-aggregation-system-Iteration3/venv/lib/python3.7/site-packages/flask/app.py", line 1951, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/alfredtingey/news-aggregation-system-Iteration3/venv/lib/python3.7/site-packages/flask/app.py", line 1820, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/alfredtingey/news-aggregation-system-Iteration3/venv/lib/python3.7/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/Users/alfredtingey/news-aggregation-system-Iteration3/venv/lib/python3.7/site-packages/flask/app.py", line 1949, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/alfredtingey/news-aggregation-system-Iteration3/venv/lib/python3.7/site-packages/flask/app.py", line 1935, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/alfredtingey/news-aggregation-system-Iteration3/venv/lib/python3.7/site-packages/flask_login/utils.py", line 272, in decorated_view
+    return func(*args, **kwargs)
+  File "/Users/alfredtingey/news-aggregation-system-Iteration3/news_agg_app/app/routes.py", line 340, in category2
+    if allnew.has_next else None
+  File "/Users/alfredtingey/news-aggregation-system-Iteration3/venv/lib/python3.7/site-packages/flask/helpers.py", line 370, in url_for
+    return appctx.app.handle_url_build_error(error, endpoint, values)
+  File "/Users/alfredtingey/news-aggregation-system-Iteration3/venv/lib/python3.7/site-packages/flask/app.py", line 2215, in handle_url_build_error
+    reraise(exc_type, exc_value, tb)
+  File "/Users/alfredtingey/news-aggregation-system-Iteration3/venv/lib/python3.7/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/Users/alfredtingey/news-aggregation-system-Iteration3/venv/lib/python3.7/site-packages/flask/helpers.py", line 358, in url_for
+    endpoint, values, method=method, force_external=external
+  File "/Users/alfredtingey/news-aggregation-system-Iteration3/venv/lib/python3.7/site-packages/werkzeug/routing.py", line 2179, in build
+    raise BuildError(endpoint, values, method, self)
+werkzeug.routing.BuildError: Could not build url for endpoint 'category2' with values ['page']. Did you forget to specify values ['category']?
+2020-03-27 16:48:28,781 INFO: News Aggregation startup [in /Users/alfredtingey/news-aggregation-system-Iteration3/news_agg_app/app/__init__.py:49]
+2020-03-27 16:48:32,067 ERROR: Exception on /category2/Politics [GET] [in /Users/alfredtingey/news-aggregation-system-Iteration3/venv/lib/python3.7/site-packages/flask/app.py:1891]
+Traceback (most recent call last):
+  File "/Users/alfredtingey/news-aggregation-system-Iteration3/venv/lib/python3.7/site-packages/flask/app.py", line 2446, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/alfredtingey/news-aggregation-system-Iteration3/venv/lib/python3.7/site-packages/flask/app.py", line 1951, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/alfredtingey/news-aggregation-system-Iteration3/venv/lib/python3.7/site-packages/flask/app.py", line 1820, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/alfredtingey/news-aggregation-system-Iteration3/venv/lib/python3.7/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/Users/alfredtingey/news-aggregation-system-Iteration3/venv/lib/python3.7/site-packages/flask/app.py", line 1949, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/alfredtingey/news-aggregation-system-Iteration3/venv/lib/python3.7/site-packages/flask/app.py", line 1935, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/alfredtingey/news-aggregation-system-Iteration3/venv/lib/python3.7/site-packages/flask_login/utils.py", line 272, in decorated_view
+    return func(*args, **kwargs)
+  File "/Users/alfredtingey/news-aggregation-system-Iteration3/news_agg_app/app/routes.py", line 341, in category2
+    if allnew.has_next else None
+  File "/Users/alfredtingey/news-aggregation-system-Iteration3/venv/lib/python3.7/site-packages/flask/helpers.py", line 370, in url_for
+    return appctx.app.handle_url_build_error(error, endpoint, values)
+  File "/Users/alfredtingey/news-aggregation-system-Iteration3/venv/lib/python3.7/site-packages/flask/app.py", line 2215, in handle_url_build_error
+    reraise(exc_type, exc_value, tb)
+  File "/Users/alfredtingey/news-aggregation-system-Iteration3/venv/lib/python3.7/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/Users/alfredtingey/news-aggregation-system-Iteration3/venv/lib/python3.7/site-packages/flask/helpers.py", line 358, in url_for
+    endpoint, values, method=method, force_external=external
+  File "/Users/alfredtingey/news-aggregation-system-Iteration3/venv/lib/python3.7/site-packages/werkzeug/routing.py", line 2179, in build
+    raise BuildError(endpoint, values, method, self)
+werkzeug.routing.BuildError: Could not build url for endpoint 'category2' with values ['page']. Did you forget to specify values ['category']?
+2020-03-27 16:51:54,128 INFO: News Aggregation startup [in /Users/alfredtingey/news-aggregation-system-Iteration3/news_agg_app/app/__init__.py:49]

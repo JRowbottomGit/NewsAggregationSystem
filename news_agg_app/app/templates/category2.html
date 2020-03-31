@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block app_content %}
+    <h1>Latest News in {{category}}</h1>
+    {% if form %}
+    <form action="" method="post">
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.post.label }}<br>
+            {{ form.post(cols=32, rows=4) }}<br>
+            {% for error in form.post.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>{{ form.submit() }}</p>
+    </form>
+    {% endif %}
+    <body>
+						{%for item in news%}
+            <br>
+            <table class="table table-hover">
+                 <tr>
+                   <td width="0px">
+                    <a href={{item[0]}}>{{item[1]}}</a>
+    								<br>
+                    <br>
+    								{{item[2]}}
+                    <br>
+                    <br>
+                    {{item[3]}}
+                    <!-- <body>
+                    <img src={{item[5]}} alt="Simply Easy Learning" width="200" height="80">
+                     </body> -->
+                    </td>
+                  </tr>
+            </table>
+            {%endfor%}
+  </body>
+{% endblock %}
