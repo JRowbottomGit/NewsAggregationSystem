@@ -7,7 +7,6 @@ from gensim.parsing.preprocessing import STOPWORDS
 from gensim.test.utils import datapath
 from gensim.models import LdaModel
 
-
 from nltk.stem import WordNetLemmatizer, SnowballStemmer
 from nltk.stem.porter import *
 import numpy as np
